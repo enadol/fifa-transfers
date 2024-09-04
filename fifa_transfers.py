@@ -1,6 +1,7 @@
 """Modules providing a function printing python version."""
 import pandas as pd
 import plotly.express as px
+import streamlit as st
 
 #read excel file "transfers_global_FIFA.xlsx" and assign it to a variable called df as DataFrame
 df = pd.read_excel("transfers_global_FIFA.xlsx")
@@ -70,10 +71,18 @@ transfers_received = group_and_sum(df_new, 'Transfers received')
 
 #print the results
 print("Transfers Balance:\\n", transfers_balance)
+print("Fees received:\\n", transfers_received)
+print("Fees spent:\\n", transfers_spent)
+
 
 #visualize the confederations results with a bar chart
 #im plotly
-fig = px.bar(transfers_balance, x=transfers_balance.index,\
-y=transfers_balance.values, title="Transfers Balance by Confederation")
-fig.show()
+fig = px.bar(transfers_received, x=transfers_received.index,\
+y=transfers_received.values, title="Transfers Balance by Confederation")
+#change the color of the bars to green if the value is positive and red if the value is negative
+fig.update_traces(marker_color=['green' if x > 0 else 'red' for x in transfers_received.values])\
+#change the size of the bars to 0.5
+fig.update_traces(width=0.5)
 
+#show in streamlit
+st.plotly_chart(fig)
