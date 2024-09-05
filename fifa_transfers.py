@@ -4,6 +4,10 @@ import plotly.express as px
 import streamlit as st
 
 st.set_page_config(layout="wide")
+#add a title to the page. "FIFA TRANSFER MARKET ANALYSIS" in bold and bigger font
+st.markdown("<h1 style='text-align: center; color: black;'>FIFA TRANSFER MARKET ANALYSIS</h1>", unsafe_allow_html=True)
+#add a subtitle to the page. "SUMMER 2024" in bold and smaller font
+st.markdown("<h2 style='text-align: center; color: black;'>SUMMER 2024</h2>", unsafe_allow_html=True)
 
 #read excel file "transfers_global_FIFA.xlsx" and assign it to a variable called df as DataFrame
 df = pd.read_excel("transfers_global_FIFA.xlsx")
@@ -56,8 +60,6 @@ with st.sidebar:
     graph_type = st.selectbox("Graph type", ["Balance", "Fees spent", "Fees received"], index=0)
     show_graph = st.button("Show Graph")
 
-st.title("FIFA TRANSFERS BALANCE BY CONFEDERATION (SUMMER 2024)")
-
 #if the button is clicked, show the graph
 if show_graph:
     if graph_type == "Balance":
@@ -96,6 +98,8 @@ if show_graph:
         fig.update_layout(yaxis_title_font_color='black')
         #change the xaxis tick angle to 45 degrees
         fig.update_layout(xaxis_tickangle=45)
+        fig.add_annotation(text="Source: FIFA", xref="paper", \
+        yref="paper", x=1, y=-0.15, showarrow=False, font=dict(size=12))
         #show the graph
         st.plotly_chart(fig, use_container_width=True)
     elif graph_type == "Fees spent":
@@ -134,6 +138,8 @@ if show_graph:
         fig.update_layout(yaxis_title_font_color='black')
         #change the xaxis tick angle to 45 degrees
         fig.update_layout(xaxis_tickangle=45)
+        fig.add_annotation(text="Source: FIFA", xref="paper", \
+        yref="paper", x=1, y=-0.15, showarrow=False, font=dict(size=12))
         #show the graph
         st.plotly_chart(fig, use_container_width=True)
     else:
@@ -173,5 +179,10 @@ if show_graph:
         fig.update_layout(yaxis_title_font_color='black')
         #change the xaxis tick angle to 45 degrees
         fig.update_layout(xaxis_tickangle=45)
-        #show the graph
+       
+#add annotation in bottom right position
+#font smaller. "Source: FIFA"
+        fig.add_annotation(text="Source: FIFA", xref="paper", \
+        yref="paper", x=1, y=-0.15, showarrow=False, font=dict(size=12))
+#show the graph
         st.plotly_chart(fig, use_container_width=True)
