@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_title="FIFA Transfer Market Analysis")
 #add a title to the page. "FIFA TRANSFER MARKET ANALYSIS" in bold and bigger font
 st.markdown("<h1 style='text-align: center; color: black;'>\
             FIFA TRANSFER MARKET ANALYSIS</h1>", unsafe_allow_html=True)
