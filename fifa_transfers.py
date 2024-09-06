@@ -5,9 +5,11 @@ import streamlit as st
 
 st.set_page_config(layout="wide")
 #add a title to the page. "FIFA TRANSFER MARKET ANALYSIS" in bold and bigger font
-st.markdown("<h1 style='text-align: center; color: black;'>FIFA TRANSFER MARKET ANALYSIS</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: black;'>\
+            FIFA TRANSFER MARKET ANALYSIS</h1>", unsafe_allow_html=True)
 #add a subtitle to the page. "SUMMER 2024" in bold and smaller font
-st.markdown("<h2 style='text-align: center; color: black;'>SUMMER 2024</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center; color: black;'>\
+            SUMMER 2024</h2>", unsafe_allow_html=True)
 
 #read excel file "transfers_global_FIFA.xlsx" and assign it to a variable called df as DataFrame
 df = pd.read_excel("transfers_global_FIFA.xlsx")
@@ -57,10 +59,13 @@ print("Transfers Balance:", transfers_balance)
 #the title of the page is "FIFA TRANSFERS BALANCE BY CONFEDERATION (SUMMER 2024)"
 #the page should be wide
 with st.sidebar:
-    select_data = st.selectbox("Select data", ["Transfers Balance", "Transfers Spent", "Transfers received"], index=2)
-    select_filter=st.selectbox("Select filter", ["Per Confederation Aggregate", "Per Confederation Countries"], index=0)
+    select_data = st.selectbox("Select data", ["Transfers Balance", "Transfers Spent", \
+                                               "Transfers received"], index=2)
+    select_filter=st.selectbox("Select filter", ["Per Confederation Aggregate",\
+                                                  "Per Confederation Countries"], index=0)
     if select_filter == "Per Confederation Countries":
-        select_confederation = st.selectbox("Select Confederation", df['Confederation'].unique(), index=0)
+        select_confederation = st.selectbox("Select Confederation",\
+                                             df['Confederation'].unique(), index=0)
     show_graph = st.button("Show Graph")
 #if select_filter is "Per Confederation Aggregate", group data by Confederation and sum
 # the values of the selected column
@@ -93,10 +98,14 @@ elif select_filter == "Per Confederation Countries":
 #the graph should be displayed only if the button "Show Graph" is clicked
 if show_graph and select_filter == "Per Confederation Aggregate":
     fig = px.bar(data, x=data.index, y=data.values, title=select_data, color=data.keys())
+    #format interactive hover text to show the value of the selected column and the Confederation or Country depending on the filter selected
+    fig.update_traces(hovertemplate='<b>Confederation: %{x}</b><br>%{y:,.0f} (USD)')
     fig.update_layout(xaxis_title="Confederation", yaxis_title=select_data)
     st.plotly_chart(fig, use_container_width=True)
 elif show_graph and select_filter == "Per Confederation Countries":
     fig = px.bar(df[df['Confederation'] == select_confederation], x='Member Association', \
         y=data.values, title=select_data, color='Member Association')
+        #format interactive hover text to show the value of the selected column and the Confederation or Country depending on the filter selected
+    fig.update_traces(hovertemplate='<b>Member country: %{x}</b><br>%{y:,.0f} (USD)')
     fig.update_layout(xaxis_title="Member Association", yaxis_title=select_data)
     st.plotly_chart(fig, use_container_width=True)
