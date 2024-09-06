@@ -11,7 +11,8 @@ st.markdown("<h1 style='text-align: center; color: black;'>\
 st.markdown("<h2 style='text-align: center; color: black;'>\
             SUMMER 2024</h2>", unsafe_allow_html=True)
 
-#read excel file "transfers_global_FIFA.xlsx" and assign it to a variable called df as DataFrame
+#read excel file "transfers_global_FIFA.xlsx" and assign
+#  it to a variable called df as DataFrame
 df = pd.read_excel("transfers_global_FIFA.xlsx")
 
 
@@ -98,14 +99,16 @@ elif select_filter == "Per Confederation Countries":
 #the graph should be displayed only if the button "Show Graph" is clicked
 if show_graph and select_filter == "Per Confederation Aggregate":
     fig = px.bar(data, x=data.index, y=data.values, title=select_data, color=data.keys())
-    #format interactive hover text to show the value of the selected column and the Confederation or Country depending on the filter selected
+    #format interactive hover text to show the value of the selected column and the
+    #  Confederation or Country depending on the filter selected
     fig.update_traces(hovertemplate='<b>Confederation: %{x}</b><br>%{y:,.0f} (USD)')
     fig.update_layout(xaxis_title="Confederation", yaxis_title=select_data)
     st.plotly_chart(fig, use_container_width=True)
 elif show_graph and select_filter == "Per Confederation Countries":
     fig = px.bar(df[df['Confederation'] == select_confederation], x='Member Association', \
         y=data.values, title=select_data, color='Member Association')
-        #format interactive hover text to show the value of the selected column and the Confederation or Country depending on the filter selected
+    #format interactive hover text to show the value of the selected 
+    # column and the Confederation or Country depending on the filter selected
     fig.update_traces(hovertemplate='<b>Member country: %{x}</b><br>%{y:,.0f} (USD)')
     fig.update_layout(xaxis_title="Member Association", yaxis_title=select_data)
     st.plotly_chart(fig, use_container_width=True)
