@@ -9,13 +9,16 @@ st.markdown("<h1 style='text-align: center; color: black;'>\
             FIFA TRANSFER MARKET ANALYSIS</h1>", unsafe_allow_html=True)
 #add a subtitle to the page. "SUMMER 2024" in bold and smaller font
 st.markdown("<h2 style='text-align: center; color: black;'>\
-            SUMMER 2024</h2>", unsafe_allow_html=True)
+            MEN'S FOOTBALL - SUMMER 2024</h2>", unsafe_allow_html=True)
 
 #read excel file "transfers_global_FIFA.xlsx" and assign
 #  it to a variable called df as DataFrame
 df = pd.read_excel("transfers_global_FIFA.xlsx")
 
-
+#Rename column Transfers received to Transfers Received
+#and Transfers spent to Transfers Spent
+df.rename(columns={'Transfers received': 'Transfers Received'}, inplace=True)
+          
 #check the first 5 rows of the dataframe to see
 # if the new columns are created correctly
 print(df.head())
@@ -38,7 +41,7 @@ def group_and_sum(data_source, column_name):
 transfers_spent = group_and_sum(df, 'Transfers Spent')
 
 #use the function to group and sum the Transfers received column
-transfers_received = group_and_sum(df, 'Transfers received')
+transfers_received = group_and_sum(df, 'Transfers Received')
 
 #use the function to group and sum the Transfers Balance column
 transfers_balance = group_and_sum(df, 'Transfers Balance')
@@ -61,7 +64,7 @@ print("Transfers Balance:", transfers_balance)
 #the page should be wide
 with st.sidebar:
     select_data = st.selectbox("Select data", ["Transfers Balance", "Transfers Spent", \
-                                               "Transfers received"], index=2)
+                                               "Transfers Received"], index=2)
     select_filter=st.selectbox("Select filter", ["Per Confederation Aggregate",\
                                                   "Per Confederation Countries"], index=0)
     if select_filter == "Per Confederation Countries":
@@ -77,7 +80,7 @@ if select_filter == "Per Confederation Aggregate":
         data = transfers_balance
     elif select_data == "Transfers Spent":
         data = transfers_spent
-    elif select_data == "Transfers received":
+    elif select_data == "Transfers Received":
         data = transfers_received
 elif select_filter == "Per Confederation Countries":
     if select_confederation:
@@ -114,4 +117,4 @@ elif show_graph and select_filter == "Per Confederation Countries":
     st.plotly_chart(fig, use_container_width=True)
 #add a text area to the page with a title "About" and a short description of the page and the data used
 st.markdown("<h3 style='text-align: center; color: black; font-size: 20px;'>About this tool</h3>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: black; font-size: 12px;'>This page displays a FIFA Transfer Market Analysis for the summer of 2024. The data used is from the FIFA Transfer Market Report 2024, published by FIFA. The data includes the total amount of money spent and received by each FIFA member association in the summer transfer window of 2024. The data is displayed in a bar chart, which can be filtered by Confederation or Member Association, and by the type of data displayed (Transfers Balance, Transfers Spent, Transfers received). The graph can be interacted with by hovering over the bars to see the exact value of the transfer, and by clicking on the legend to hide or show the data for a specific Confederation or Member Association. Development: Enrique Adolfo López Magallón - @EnriqueALopezM</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: black; font-size: 12px;'>This page displays a Transfer Market Analysis of men's international football for the summer of 2024. The data used is from the FIFA Transfer Market Report 2024, published by FIFA in september 2024. The data includes the total amount of money spent and received by each FIFA member association (federation) in the summer transfer window of 2024. The data is displayed in a bar chart, which can be filtered by Confederation or Member Association, and by the type of data displayed (Transfers Balance, Transfers Spent, Transfers received). The graph can be interacted with by hovering over the bars to see the exact value of the transfer, and by clicking on the legend to hide or show the data for a specific Confederation or Member Association. Development: Enrique Adolfo López Magallón - @EnriqueALopezM</p>", unsafe_allow_html=True)
