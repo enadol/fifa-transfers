@@ -89,7 +89,7 @@ elif select_filter == "Per Confederation Countries":
         elif select_data == "Transfers Spent":
             data = df[df['Confederation'] == select_confederation]["Transfers Spent"]
         else:
-            data = df[df['Confederation'] == select_confederation]["Transfers received"]
+            data = df[df['Confederation'] == select_confederation]["Transfers Received"]
 #create and show graph to be displayed with the filtered data
 #the graph should be a bar chart
 #the x-axis should be the Confederation or Member Association depending on the filter selected
