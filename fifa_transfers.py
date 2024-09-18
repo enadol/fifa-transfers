@@ -5,6 +5,37 @@ import streamlit as st
 from streamlit_autorefresh import st_autorefresh
 
 st.set_page_config(layout="wide", page_title="FIFA Transfer Market Analysis")
+st.markdown('<style>' + open('style.css').read() + '</style>', unsafe_allow_html=True)
+
+#create head section and add tag for keywords als metadata
+st.markdown("<head><meta name='keywords' content='FIFA, \
+    Transfer Market, football, transfers, Analysis, Men's Football,\
+     Summer 2024, FIFA Transfer Market Report 2024, FIFA Member Association,\
+            Transfers Balance, Transfers Spent, Transfers received,\
+            Confederation, Member Association, Data Visualization,\
+            Streamlit, Python, Pandas, Plotly, FIFA Transfer Market\
+            Analysis, FIFA Transfer Market Report, FIFA Transfer Market \
+            Data, FIFA Transfer Market Statistics, FIFA Transfer Market\
+            Analysis Tool, FIFA Transfer Market Analysis Dashboard, FIFA \
+            Transfer Market Analysis App, FIFA Transfer Market Analysis \
+            Web App, FIFA Transfer Market Analysis Tool, FIFA Transfer \
+            Market Analysis Dashboard, FIFA Transfer Market Analysis App, \
+            FIFA Transfer Market Analysis Web App'></head>", unsafe_allow_html=True)
+#add other elements relevant for Search Engine Optimization
+st.markdown("<meta name='description' content='This page displays \
+            a Transfer Market Analysis of men international football \
+             for the summer of 2024. The data used is from the FIFA Transfer \
+            Market Report 2024, published by FIFA in september 2024. \
+            The data includes the total amount of money spent and received \
+            by each FIFA member association (federation) in the summer transfer\
+            window of 2024. The data is displayed in a bar chart, which can be \
+            filtered by Confederation or Member Association, and by the type of\
+            data displayed (Transfers Balance, Transfers Spent, Transfers\
+            received).'/>", unsafe_allow_html=True)
+st.markdown("<meta name='author' content='Enrique Adolfo López Magallón'/>", unsafe_allow_html=True)
+st.markdown("<meta name='viewport' content='width=device-width, \
+            initial-scale=1.0'/>", unsafe_allow_html=True)
+
 #add a title to the page. "FIFA TRANSFER MARKET ANALYSIS" in bold and bigger font
 st.markdown("<h1 style='text-align: center; color: black;'>\
             FIFA TRANSFER MARKET ANALYSIS</h1>", unsafe_allow_html=True)
@@ -19,7 +50,6 @@ df = pd.read_excel("transfers_global_FIFA.xlsx")
 #Rename column Transfers received to Transfers Received
 #and Transfers spent to Transfers Spent
 df.rename(columns={'Transfers received': 'Transfers Received'}, inplace=True)
-          
 #check the first 5 rows of the dataframe to see
 # if the new columns are created correctly
 print(df.head())
@@ -114,18 +144,28 @@ elif show_graph and select_filter == "Per Confederation Countries":
     #format interactive hover text to show the value of the selected
     # column and the Confederation or Country depending on the filter selected
     fig.update_traces(hovertemplate='<b>Member country: %{x}</b><br>%{y:,.0f} (USD)')
-    fig.update_layout(xaxis_title="Member Association", yaxis_title=select_data, paper_bgcolor="oldlace")
+    fig.update_layout(xaxis_title="Member Association", yaxis_title=select_data, \
+                      paper_bgcolor="oldlace")
     st.plotly_chart(fig, use_container_width=True)
-#add a text area to the page with a title "About" and a short description of the page and the data used
-st.markdown("<h3 style='text-align: center; color: black; font-size: 20px;'>About this tool</h3>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: black; font-size: 12px;'>This page displays a Transfer Market Analysis of men's international football for the summer of 2024. The data used is from the FIFA Transfer Market Report 2024, published by FIFA in september 2024. The data includes the total amount of money spent and received by each FIFA member association (federation) in the summer transfer window of 2024. The data is displayed in a bar chart, which can be filtered by Confederation or Member Association, and by the type of data displayed (Transfers Balance, Transfers Spent, Transfers received). The graph can be interacted with by hovering over the bars to see the exact value of the transfer, and by clicking on the legend to hide or show the data for a specific Confederation or Member Association. Development: Enrique Adolfo López Magallón - @EnriqueALopezM</p>", unsafe_allow_html=True)
-#create head section and add tag for keywords als metadata
-st.markdown("<head><meta name='keywords' content='FIFA, Transfer Market, football, transfers, Analysis, Men's Football, Summer 2024, FIFA Transfer Market Report 2024, FIFA Member Association, Transfers Balance, Transfers Spent, Transfers received, Confederation, Member Association, Data Visualization, Streamlit, Python, Pandas, Plotly, FIFA Transfer Market Analysis, FIFA Transfer Market Report, FIFA Transfer Market Data, FIFA Transfer Market Statistics, FIFA Transfer Market Analysis Tool, FIFA Transfer Market Analysis Dashboard, FIFA Transfer Market Analysis App, FIFA Transfer Market Analysis Web App, FIFA Transfer Market Analysis Tool, FIFA Transfer Market Analysis Dashboard, FIFA Transfer Market Analysis App, FIFA Transfer Market Analysis Web App'></head>", unsafe_allow_html=True)
-#add other elements relevant for Search Engine Optimization
-st.markdown("<meta name='description' content='This page displays a Transfer Market Analysis of men international football for the summer of 2024. The data used is from the FIFA Transfer Market Report 2024, published by FIFA in september 2024. The data includes the total amount of money spent and received by each FIFA member association (federation) in the summer transfer window of 2024. The data is displayed in a bar chart, which can be filtered by Confederation or Member Association, and by the type of data displayed (Transfers Balance, Transfers Spent, Transfers received).'/>", unsafe_allow_html=True)
-st.markdown("<meta name='author' content='Enrique Adolfo López Magallón'/>", unsafe_allow_html=True)
-st.markdown("<meta name='viewport' content='width=device-width, initial-scale=1.0'/>", unsafe_allow_html=True)
+#add a text area to the page with a title "About" and a short description
+#of the page and the data used
+st.markdown("<h3 style='text-align: center; color: black; \
+    font-size: 20px;'>About this tool</h3>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: black; font-size: 12px;'>\
+    This page displays a Transfer Market Analysis of men's international football \
+    for the summer of 2024. The data used is from the FIFA Transfer Market Report 2024, \
+    published by FIFA in september 2024. The data includes the total amount of money \
+    spent and received by each FIFA member association (federation) in the summer transfer \
+    window of 2024. The data is displayed in a bar chart, which can be filtered by Confederation \
+    or Member Association, and by the type of data displayed (Transfers Balance, Transfers Spent, \
+    Transfers received). The graph can be interacted with by hovering over the bars to see the exact \
+    value of the transfer, and by clicking on the legend to hide or show the data for a specific \
+    Confederation or Member Association. Development: Enrique Adolfo López Magallón - \
+    @EnriqueALopezM</p>", unsafe_allow_html=True)
+
 #add a link to the source of the data used in the page
-st.markdown("<p style='text-align: center; color: black; font-size: 12px;'>Data source: <a href='https://inside.fifa.com/legal/football-regulatory/international-transfer-snapshot/men'>FIFA Transfer Market Report 2024</a></p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: black; font-size: 12px;'>Data source: \
+<a href='https://inside.fifa.com/legal/football-regulatory/international-transfer-snapshot/men'>\
+FIFA Transfer Market Report 2024</a></p>", unsafe_allow_html=True)
 
 st_autorefresh(interval=60 * 60 * 1000, key="dataframerefresh")
