@@ -5,7 +5,8 @@ import streamlit as st
 from streamlit_autorefresh import st_autorefresh
 
 st.set_page_config(layout="wide", page_title="FIFA Transfer Market Analysis")
-st.markdown('<style>' + open('style.css').read() + '</style>', unsafe_allow_html=True)
+st.markdown('<style>' + open('style.css', encoding='utf-8').read() + \
+            '</style>', unsafe_allow_html=True)
 
 #create head section and add tag for keywords als metadata
 st.markdown("<head><meta name='keywords' content='FIFA, \
