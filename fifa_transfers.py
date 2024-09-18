@@ -2,6 +2,7 @@
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+from streamlit_autorefresh import st_autorefresh
 
 st.set_page_config(layout="wide", page_title="FIFA Transfer Market Analysis")
 #add a title to the page. "FIFA TRANSFER MARKET ANALYSIS" in bold and bigger font
@@ -126,3 +127,5 @@ st.markdown("<meta name='author' content='Enrique Adolfo López Magallón'/>", u
 st.markdown("<meta name='viewport' content='width=device-width, initial-scale=1.0'/>", unsafe_allow_html=True)
 #add a link to the source of the data used in the page
 st.markdown("<p style='text-align: center; color: black; font-size: 12px;'>Data source: <a href='https://inside.fifa.com/legal/football-regulatory/international-transfer-snapshot/men'>FIFA Transfer Market Report 2024</a></p>", unsafe_allow_html=True)
+
+st_autorefresh(interval=60 * 60 * 1000, key="dataframerefresh")
